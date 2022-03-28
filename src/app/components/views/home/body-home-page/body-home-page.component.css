@@ -14,8 +14,8 @@ li > .active{
 }
 
 .tag-item{
-    color: white !important;
-    background-color: gray !important;
+    color: white ;
+    background-color: gray ;
     font-size: 0.8rem;
     padding: 3px 8px;
     white-space: nowrap;
@@ -23,7 +23,13 @@ li > .active{
     display: inline-block;
     margin-bottom: 5px;
     margin-right: 5px;
+    cursor: pointer;
 }
+.tag-item:hover{
+  background-color: aliceblue;
+  color: black;
+}
+
 
 @media (max-width: 576px) {
    .tags{

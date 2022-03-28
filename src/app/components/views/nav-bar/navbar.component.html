@@ -1,12 +1,12 @@
 <div class="container row d-flex animate__animated animate__backInDown p-2 mx-auto">
   <div class="nav-left col-lg-5 col-md-5 col-sm-7 col-9">
-    <a class="nav-brand" rounterLink="home">Amelie's Blog</a>
+    <a class="nav-brand" routerLink="home">Amelie's Blog</a>
   </div>
   <div class="nav-right col-lg-7 col-md-7 col-sm-5 col-3 d-flex align-items-center justify-content-end ps-0 pe-0">
 
     <i class="fab-solid fab-list-dropdown"></i>
     <ul class="nav-right__list d-flex mb-0">
-      <li class=""><a routerLink="home">Home</a> </li>
+      <li class=" me-1"><a routerLink="home">Home</a> </li>
 
       <li class=" ms-3" *ngIf="isLogging">
 
@@ -30,7 +30,7 @@
 
       <li class="ms-3" *ngIf="isLogging">
         <a routerLink={{currentUser.username}} class="ms-1 d-flex align-items-center">
-          <img class="profile__img" alt="">
+          <img class="profile__img" [src]="currentUser.image" alt="">
           {{currentUser.username}}
         </a>
       </li>
@@ -38,18 +38,18 @@
   </div>
 
   <!--Toggle Button-->
-  <div class="myToggle col-lg-5 col-md-5 col-sm-5 col-3 text-align-end justify-content-end pe-0" ngbDropdown
+  <div class="myToggle col-lg-7 col-md-7 col-sm-5 col-3 text-align-end justify-content-end pe-0" ngbDropdown
     #myDrop="ngbDropdown">
     <button class="btn btn-outline-success" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Menu
 
     </button>
-    <div ngbDropdownMenu aria-labelledby="dropdownManual">
+    <div class="myDropdown" ngbDropdownMenu aria-labelledby="dropdownManual">
       <li ngbDropdownItem class="" routerLink="home">
         <a>Home</a>
       </li>
 
-      <li ngbDropdownItem class="" *ngIf="isLogging" routerLink="">
-        <a>
+      <li ngbDropdownItem routerLink="new-article">
+        <a class="" *ngIf="isLogging">
           <i class="fa-solid fa-pen-to-square"></i>
           New Article </a>
       </li>
@@ -75,12 +75,4 @@
       </li>
     </div>
   </div>
-</div>
-<!--Main Head-->
-<div class="row header d-flex justify-content-center flex-column align-items-center ">
-  <h1 class="header-brand animate__animated animate__backInLeft pt-2">
-    Amelie
-  </h1>
-  <p class="animate__animated animate__backInLeft">A place to share your knowledge.</p>
-  <!-- <button *ngIf="isLogging" class="btn btn-danger w-25 align-items-center" (click)="logOut()">LogOut</button> -->
 </div>

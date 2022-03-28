@@ -7,14 +7,14 @@ import { UserService } from 'src/app/services/User.service';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.css']
+  styleUrls: ['./setting.component.css'],
 })
 export class SettingComponent implements OnInit {
-
-  user: User = {} as User;
-  settingsForm: FormGroup;
+  public user: User = {} as User;
+  public settingsForm!: FormGroup;
   // errors: Errors = {errors: {}};
   isSubmitting = false;
+  public validateImg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
   constructor(
     private router: Router,
@@ -22,28 +22,21 @@ export class SettingComponent implements OnInit {
     private fb: FormBuilder
   ) {
     // create form group using the form builder
-    this.settingsForm = this.fb.group({
-      image: ['',],
-      username: [''],
-      bio: [''],
-      email: [''],
-      password: ['']
-    });
-    // Optional: subscribe to changes on the form
-    // this.settingsForm.valueChanges.subscribe(values => this.updateUser(values));
   }
 
   ngOnInit() {
     // Make a fresh copy of the current user's object to place in editable form fields
-    Object.assign(this.user, this.userService.getCurrentUser());
-    console.log('test hàm getCurrentUser', this.user)
-
-    // this.userService.currentUser.subscribe(data => {
-    //   this.settingsForm.patchValue(data)
-    //   console.log(data)
-    // })
-    // Fill the form
-    this.settingsForm.patchValue(this.user);
+    this.user = this.userService.getCurrentUser();
+    this.settingsForm = this.fb.group({
+      image: [
+        this.user.image ||
+          'https://static.productionready.io/images/smiley-cyrus.jpg',
+      ],
+      username: [this.user.username, [Validators.required]],
+      bio: [this.user.bio],
+      email: [this.user.email, [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
   }
 
   logout() {
@@ -53,24 +46,30 @@ export class SettingComponent implements OnInit {
 
   submitForm() {
     this.isSubmitting = true;
-
     // update the model
     this.updateUser(this.settingsForm.value);
-
-    this.userService
-    .update(this.user)
-    .subscribe({
-      next: updatedUser => this.router.navigateByUrl(`/${updatedUser.username}`),
-      error: err => {
+    this.userService.update(this.user).subscribe({
+      next: (updatedUser) =>
+        this.router.navigateByUrl(`/${updatedUser.username}`),
+      error: (err) => {
         // this.errors = err;
+        alert('Loi me roi');
         this.isSubmitting = false;
-      }
+      },
+    });
+  }
+
+  updateUser(values: User) {
+    if (
+      values.image.match(this.validateImg) === null ||
+      values.image.match(this.validateImg) === undefined
+    ) {
+      alert('Invalid image url. We will set a default profile image for');
+      values.image =
+        'https://static.productionready.io/images/smiley-cyrus.jpg';
+      this.user = values;
+    } else {
+      this.user = values;
     }
-    );
   }
-
-  updateUser(values: Object) {
-    Object.assign(this.user, values);
-  }
-
 }

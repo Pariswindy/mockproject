@@ -7,17 +7,18 @@ import { EditComponent } from './components/views/new-article/edit/edit.componen
 import { NewArticleComponent } from './components/views/new-article/new-article.component';
 import { SignUpComponent } from './components/views/sign-up/sign-up.component';
 import { AuthService } from './services/Auth.service';
+
 import { FavoritedArticleComponent } from './components/views/my-profile/favorited-article/favorited-article.component';
 import { MyArticleComponent } from './components/views/my-profile/my-article/my-article.component';
 import { MyProfileResolver } from './components/views/my-profile/my-profile-resolver.service';
 import { MyProfileComponent } from './components/views/my-profile/my-profile.component';
 import { SettingComponent } from './components/views/setting/setting.component';
-
+import { AuthGuard } from './services/authguard.guard';
 
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent,
+    component: HomeComponent
   },
   { path: 'home/:slug', component: ArticleComponent },
   {
@@ -30,16 +31,14 @@ const routes: Routes = [
     path: 'edit/:slug',
     component: EditComponent,
     canDeactivate: [AuthService]
-
-
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: 'sign-up',
-    component: SignUpComponent,
+    component: SignUpComponent
   },
   {
     path: '',
@@ -50,29 +49,27 @@ const routes: Routes = [
   {
     path: 'settings',
     component: SettingComponent,
+    canActivate:[AuthGuard],
+    // }, {
+    //   path: 'my-posts/:slug',
+    //   component: ArticleComponent
   },
   {
     path: ':username',
     component: MyProfileComponent,
+
     resolve: {
       profile: MyProfileResolver
     },
-    children: [
-      {
-        path: 'my-posts',
-        component: MyArticleComponent
-      },
-      {
-        path: 'favorites',
-        component: FavoritedArticleComponent
+
       }
     ]
-  }
-]
-  @NgModule({
+
+
+
+@NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  declarations: [
-  ]
+  declarations: []
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

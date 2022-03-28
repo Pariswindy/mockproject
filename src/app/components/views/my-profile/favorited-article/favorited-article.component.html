@@ -1,37 +1,23 @@
-<!-- <div
+<div
   class="card mb-2 w-100 p-5"
   style="width: 18rem"
-  *ngFor="let article of favoritedArticles"
->
+  *ngFor="let article of favoritedArticles | paginate: { itemsPerPage: 3, currentPage: p }">
   <div class="d-flex flex-wrap">
     <div class="m-1 mr-auto d-flex col-12">
       <h3 (click)="goToArticle(article)" class="m-0"></h3>
-      <img src="{{ userImage }}" class="card-img-top img m-2" alt="..." />
+      <img [src]="article.author.image" class="card-img-top img m-2" alt="..." style="height: 20px;width: 20px;" />
       <div class="m-1 mr-auto">
-        <h3 (click)="goToArticle(article)" class="m-0">
+        <h3 (click)="goToProfile(article.author.username)" class="m-0">
           <a>{{ article.author.username }} </a>
         </h3>
         <p class="m-0">{{ article.createdAt | date }}</p>
       </div>
       <div>
-        <button type="button" class="btn btn-outline-success m-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-heart"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
-            />
-          </svg>
-          {{ article.favoritesCount }}
-        </button>
+        <app-favorite (isFavorite)="onFavorite($event)"  [childItem]="article"></app-favorite>
+
+
       </div>
     </div>
-
     <div class="card-body">
       <h5 (click)="goToArticle(article)">
         <a> {{ article.title }} </a>
@@ -44,5 +30,11 @@
       </span>
     </div>
   </div>
-</div> -->
-<p>Favourite Posts Works!</p>
+</div>
+<<<<<<< HEAD
+{{favoritedArticles | json}}
+<pagination-controls *ngIf="favoritedArticles.length >0" class="paging" (pageChange)="p = $event" ></pagination-controls>
+=======
+
+<pagination-controls *ngIf="favoritedArticles.length >0" class="paging" (pageChange)="p = $event" ></pagination-controls>
+>>>>>>> 7a6b5cce590743f90a131b04e3102fa097ddb140

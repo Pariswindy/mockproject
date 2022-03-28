@@ -7,6 +7,7 @@ import { Subscription, switchMap } from 'rxjs';
 import { Comment } from 'src/app/models/comment';
 import { AuthService } from 'src/app/services/Auth.service';
 import { UserService } from 'src/app/services/User.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-article',
@@ -25,15 +26,23 @@ export class ArticleComponent implements OnInit,OnDestroy {
   public CurrentUserName!: string;
   public isAuth: Subscription = new Subscription();
   public isLogin!: boolean;
+  public p=1
 
   constructor(
     public article: ArticleService,
     public activeroute: ActivatedRoute,
     public auth: AuthService,
     public UserAuth: UserService,
-    public router: Router
+    public router: Router,
+    public userService:UserService
+
   ) {
-    this.CurrentUserName = this.auth.currentUser.username;
+     this.userService.currentUser.subscribe(
+      (userData: User) => {
+        this.CurrentUserName =userData.username ;
+
+      }
+    );
     this.isAuth.add(this.UserAuth.isAuthenticated.subscribe((data: boolean) => {
       this.isLogin = data;
     }));
@@ -128,6 +137,11 @@ export class ArticleComponent implements OnInit,OnDestroy {
       this.isAuth.add(this.article.deleteArticle(slug).subscribe((delArt) => {}));
       this.router.navigate(['/home']);
     }
+  }
+  goToProfile(username:string){
+    this.router.navigate([`${username}`])
+
+
   }
 
   ngOnDestroy(): void {

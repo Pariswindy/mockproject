@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import {  Observable } from 'rxjs';
 import { currentUser } from 'src//app/models/currentUser';
-
-import { NewArticleComponent } from '../components/views/new-article/new-article.component';
 import { CheckDeactivate } from '../models/checkActive';
 
 

@@ -10,13 +10,13 @@ import {Article} from '../../../../models/article'
 })
 export class FavoriteComponent implements OnInit {
  @Input() childItem!:Article;
- @Output() isFavorite = new EventEmitter();
+ @Output() isFavorite = new EventEmitter<boolean>();
   public summitFavo = true;
   public checkLogin = false;
   constructor(private _articleService: ArticleService, private _userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this._userService.isAuthenticated.subscribe(islogin => this.checkLogin = islogin) 
+    this._userService.isAuthenticated.subscribe(islogin => this.checkLogin = islogin)
   }
 
 
@@ -29,21 +29,23 @@ export class FavoriteComponent implements OnInit {
     this.summitFavo = false;
     if(this.childItem.favorited){
       this._articleService.unfavoriteArticle(this.childItem.slug).subscribe(data => {
-        console.log('ok ok')
         this.childItem.favoritesCount--;
         this.childItem.favorited = false
         this.summitFavo =true;
+        this.isFavorite.emit(false)
+   
       })
-     
+
     }else{
       console.log(this.childItem.favorited)
       this._articleService.favoriteArticle(this.childItem.slug).subscribe(data => {
         this.childItem.favoritesCount++
         this.childItem.favorited = true
         this.summitFavo =true;
+        this.isFavorite.emit(true)
       })
-    
+
     }
- 
+
   }
 }

@@ -64,7 +64,7 @@ export class UserService {
     return this.apiService.post('/users/login', {user: credentials})
       .pipe(map((data) => {
         this.setAuth(data.user);
-        console.log(data)
+
         return data;
       }))
   }
@@ -73,7 +73,7 @@ export class UserService {
     return this.apiService.post('/users', {user: credentials})
       .pipe(map((data) => {
         this.setAuth(data.user);
-        console.log(data)
+
         return data;
       }))
   }
@@ -83,7 +83,7 @@ export class UserService {
     return this.apiService.post('/users'+route, {user: credentials})
       .pipe(map((data) => {
         this.setAuth(data.user);
-        console.log(data)
+
         return data;
       }))
   }
@@ -91,7 +91,9 @@ export class UserService {
   // Hàm gọi khi click sign-up/log in để lưu token vào localStorage
   setAuth(user: User) {
     // Save JWT sent from server in localstorage
+
     this.jwtService.saveToken(user.token)
+
 
     // Set current user data into observable
     this.currentUserSubject.next(user);

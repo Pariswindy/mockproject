@@ -17,7 +17,7 @@ export class FollowButtonComponent implements OnInit {
   ) {}
 
   @Input() profile!: Profile;
-  @Output() onToggle = new EventEmitter<boolean>();
+  @Output() Toggle = new EventEmitter<boolean>();
   isSubmitting = false;
 
   toggleFollowing() {
@@ -35,7 +35,7 @@ export class FollowButtonComponent implements OnInit {
         this.profilesService.follow(this.profile.username).subscribe({
           next: (data) => {
             this.isSubmitting = false;
-            this.onToggle.emit(true);
+            this.profile.following = true
           },
           error: (err) => (this.isSubmitting = false),
         });
@@ -45,7 +45,7 @@ export class FollowButtonComponent implements OnInit {
         this.profilesService.unfollow(this.profile.username).subscribe({
           next: (data) => {
             this.isSubmitting = false;
-            this.onToggle.emit(false);
+            this.profile.following = false
           },
           error: (err) => (this.isSubmitting = false),
         });

@@ -6,7 +6,8 @@ import { UserService } from 'src/app/services/User.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
+
 })
 export class SignUpComponent implements OnInit {
   signupForm: any;
@@ -41,7 +42,6 @@ export class SignUpComponent implements OnInit {
     .subscribe({
       next: (data: any) => this.router.navigateByUrl('/home'),
       error: (err: any) => {
-        console.log((err?.error?.errors))
         this.isSubmitting = false;
         this.usernameError = 'Email or username is already taken!'
       }
@@ -77,6 +77,10 @@ export class SignUpComponent implements OnInit {
       //   }
       // }
     })
+  }
+
+  focusUserNameOrEmail(){
+    this.usernameError =""
   }
 
 

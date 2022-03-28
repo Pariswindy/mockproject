@@ -63,11 +63,7 @@ export class ArticleService {
     body: string,
     tagList: string[]
   ) {
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
-    })}
+
     return this.http.post(
       'https://conduit.productionready.io/api/articles',
       {
@@ -77,7 +73,7 @@ export class ArticleService {
           'body': body,
           'tagList':tagList
         },
-      },option
+      }
     );
   }
 
@@ -87,40 +83,23 @@ export class ArticleService {
     );
   }
   getFollow(username:string) {
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
-    })}
-    return this.http.post(`https://conduit.productionready.io/api/profiles/${username}/follow`,{},option)
+
+    return this.http.post(`https://conduit.productionready.io/api/profiles/${username}/follow`,{})
   }
   delFollow(username:string) {
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
-    })}
-    return this.http.delete(`https://conduit.productionready.io/api/profiles/${username}/follow`,option)
+
+    return this.http.delete(`https://conduit.productionready.io/api/profiles/${username}/follow`)
   }
 
 
   getFavourite(slug:string) {
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
-    })}
 
-    return this.http.post<OutFavorite>(`https://conduit.productionready.io/api/articles/${slug}/favorite`,{},option)
+    return this.http.post<OutFavorite>(`https://conduit.productionready.io/api/articles/${slug}/favorite`,{})
   }
 
   delFavourite(slug:string) {
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
-    })}
-    return this.http.delete<OutFavorite>(`https://conduit.productionready.io/api/articles/${slug}/favorite`,option)
+
+    return this.http.delete<OutFavorite>(`https://conduit.productionready.io/api/articles/${slug}/favorite`)
   }
 
 
@@ -132,40 +111,27 @@ export class ArticleService {
   }
 
   addCommentArticle(slug: string, body: string) {
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
-    })}
-    console.log(this._authService.currentUser.token)
+
     return this.http.post<oneComment>(
       'https://conduit.productionready.io/api/articles/' + slug + '/comments',
       {
         'comment': {
           'body': body,
         },
-      },option
+      }
     );
   }
 
   deleteCommentArticle(slug: string, id: number) {
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
-    })}
+
     return this.http.delete(
-      `https://conduit.productionready.io/api/articles/${slug}/comments/${id}`,option
+      `https://conduit.productionready.io/api/articles/${slug}/comments/${id}`
     );
   }
   deleteArticle(slug: string) {
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
-    })}
+
     return this.http.delete(
-      `https://conduit.productionready.io/api/articles/${slug}`,option
+      `https://conduit.productionready.io/api/articles/${slug}`,
     );
   }
   updateArticle(slug:string,
@@ -173,22 +139,28 @@ export class ArticleService {
     description?: string,
     body?: string,
     tagList?: string[]){
-    const option= {
-      headers : new HttpHeaders({
-      'Content-type':  'application/json',
-      'Authorization': `Token ${this._authService.currentUser.token}`
 
-  })}
   return this.http.put<ResponArticle>(`https://conduit.productionready.io/api/articles/${slug}`,{
     'article': {
       'title': title,
       'description': description,
       'body': body,
     },
-  },option)
+  },)
 }
-getArticleListUser(){
-  return this.http.get<ListArticleUser>(`https://conduit.productionready.io/api/articles/?author=${this._authService.currentUser.username}`)
+getArticleListUser(username:string){
+  return this.http.get<ListArticleUser>(`https://conduit.productionready.io/api/articles/?author=${username}`)
 }
+getArticleByAuthor(author: string) {
+  return this.http.get<Articles>(
+    'https://conduit.productionready.io/api/articles?author=' + author
+  );
+}
+getArticleByFav(username: string) {
+  return this.http.get(
+    'https://conduit.productionready.io/api/articles?favorited=' + username
+  );
+}
+
 
 }

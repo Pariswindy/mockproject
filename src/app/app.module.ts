@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +13,7 @@ import { ArticleComponent } from './components/views/article/article.component';
 import { LoginComponent } from './components/views/login/login.component';
 import { SignUpComponent } from './components/views/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BodyHomePageComponent } from './components/views/home/body-home-page/body-home-page.component';
+import { BodyHomePageComponent } from './components/views/home/body-home-page/body-home-page.component'
 import { FeedComponent } from './components/views/home/body-home-page/feed/feed.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ArticleService } from './services/Article.service';
@@ -31,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDailogComponent } from './components/views/new-article/confirm-dailog/confirm-dailog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -41,6 +42,8 @@ import { MyProfileResolver } from './components/views/my-profile/my-profile-reso
 import { FollowButtonComponent } from './components/commons/follow-button/follow-button.component';
 import { FavoritedArticleComponent } from './components/views/my-profile/favorited-article/favorited-article.component';
 import { MyArticleComponent } from './components/views/my-profile/my-article/my-article.component';
+import { HeaderComponent } from './components/views/header/header.component';
+import { NgxSpinnerModule } from "ngx-spinner"
 
 
 
@@ -66,10 +69,12 @@ import { MyArticleComponent } from './components/views/my-profile/my-article/my-
     MyProfileComponent,
     FollowButtonComponent,
     FavoritedArticleComponent,
-    MyArticleComponent
+    MyArticleComponent,
+    HeaderComponent,
 
   ],
   imports: [
+    NgxPaginationModule,
     AppRoutingModule,
     BrowserModule,
     ReactiveFormsModule,
@@ -79,9 +84,10 @@ import { MyArticleComponent } from './components/views/my-profile/my-article/my-
     MatDialogModule,
     MatButtonModule,
     NgbModule,
-
+    NgxPaginationModule,
+    NgxSpinnerModule
   ],
-
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
@@ -92,7 +98,9 @@ import { MyArticleComponent } from './components/views/my-profile/my-article/my-
     UserService,
     MyProfileResolver,
 
+
   ],
+
 })
 export class AppModule { }
 

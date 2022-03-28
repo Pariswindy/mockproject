@@ -13,7 +13,7 @@ export class BodyHomePageComponent implements OnInit {
   public option:string=""
   public checkLogin:boolean = true
   constructor(private _articleService: ArticleService, private _userService: UserService) {
-    this._userService.isAuthenticated.subscribe(islogin => this.checkLogin = islogin) 
+    this._userService.isAuthenticated.subscribe(islogin => this.checkLogin = islogin)
   }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class BodyHomePageComponent implements OnInit {
     this.tag ="";
     this.option = 'global'
   }
-  
+
   showUserFeed(){
     this.tag ="";
     this.option = 'user'

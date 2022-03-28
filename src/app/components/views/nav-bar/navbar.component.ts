@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/User.service';
 import { AuthService } from '../../../services/Auth.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -11,10 +11,13 @@ import { AuthService } from '../../../services/Auth.service';
 export class NavbarComponent implements OnInit {
   currentUser!: User;
   isLogging = false;
-  constructor(private userService: UserService,
-    ) { }
+  isInProfilePage?: boolean;
+  isActivated!: boolean;
+  constructor(private userService: UserService, public router: Router, private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+
     this.userService.currentUser.subscribe(
       userData => this.currentUser = userData
     )
@@ -24,6 +27,7 @@ export class NavbarComponent implements OnInit {
       }
     )
   }
+
   logOut() {
     this.userService.purgeAuth()
   }

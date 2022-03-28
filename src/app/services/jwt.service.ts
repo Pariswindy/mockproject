@@ -13,10 +13,12 @@ export class JwtService {
 
   saveToken(token: string) {
     window.localStorage.setItem('jwtToken', token)
+
   }
 
   destroyToken() {
     window.localStorage.removeItem('jwtToken')
+
   }
 
   constructor() { }

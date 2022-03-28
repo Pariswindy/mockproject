@@ -1,0 +1,3 @@
+.paging /deep/ .ngx-pagination .disabled{
+    background-color:black !important;
+}

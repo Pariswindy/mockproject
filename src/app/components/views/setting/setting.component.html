@@ -1,65 +1,144 @@
+<app-header></app-header>
 <div class="settings-page">
-  <div class="container page">
-    <div class="row">
+  <div
+    class="container col-lg-9 col-md-12 page animate__animated animate__fadeInUp"
+  >
+    <div class="row m-4">
       <div class="col-md-6 offset-md-3 col-xs-12">
 
-        <h1 class="text-xs-center">Your Settings</h1>
 
         <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-          <fieldset [disabled]="isSubmitting">
+          <h1 class="setting-text text-xs-center mt-2">Your Settings</h1>
+
+          <form class="" [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+            <fieldset [disabled]="isSubmitting">
+              <fieldset class="form-group">
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="URL of profile picture"
+                  formControlName="image"
+                />
+              </fieldset>
+              
+
+              <fieldset class="form-group">
+                <input
+                  class="form-control form-control-lg"
+                  type="text"
+                  placeholder="Username"
+                  formControlName="username"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    settingsForm.controls['username'].touched &&
+                    settingsForm.controls['username'].invalid
+                  "
+                >
+                  <small
+                    *ngIf="settingsForm.controls['username'].errors?.['required']"
+                  >
+                    Username is required
+                  </small>
+                </div>
+              </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control"
-                type="text"
-                placeholder="URL of profile picture"
-                formControlName="image" />
+              <textarea
+                class="form-control form-control-lg"
+                rows="2"
+                placeholder="Short bio about you"
+                formControlName="bio"
+              >
+              <input class="form-control" type="text" placeholder="URL of profile picture" formControlName="image" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="text"
-                placeholder="Username"
+              <input class="form-control form-control-lg" type="text" placeholder="Username"
                 formControlName="username" />
             </fieldset>
 
             <fieldset class="form-group">
-              <textarea class="form-control form-control-lg"
-                rows="8"
-                placeholder="Short bio about you"
+              <textarea class="form-control form-control-lg" rows="2" placeholder="Short bio about you"
                 formControlName="bio">
-              </textarea>
+              </textarea
+                >
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input
+                  class="form-control form-control-lg"
+                  type="email"
+                  placeholder="Email"
+                  formControlName="email"
+                />
+              
+
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    settingsForm.controls['email'].touched &&
+                    settingsForm.controls['email'].invalid
+                  "
+                >
+                  <small
+                    *ngIf="settingsForm.controls['email'].errors?.['required']"
+                  >
+                    Email is required
+                  </small>
+                  <small
+                    *ngIf="settingsForm.controls['email'].errors?.['email']"
+                  >
+                    Invalid Email Format
+                  </small>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input
+                  class="form-control form-control-lg"
+                  type="password"
+                  placeholder="New Password"
+                  formControlName="password"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    settingsForm.controls['password'].touched &&
+                    settingsForm.controls['password'].invalid
+                  "
+                >
+                  <small
+                    *ngIf="settingsForm.controls['password'].errors?.['required']"
+                  >
+                    Password is required
+                  </small>
+                  <small
+                    *ngIf="settingsForm.controls['password'].errors?.['minlength']"
+                  >
+                    Password is at least 8 characters long!
+                  </small>
+                </div>
+              </fieldset>
+
+              <button
+                class="btn btn-lg btn-primary pull-xs-right"
+                type="submit"
+                [disabled]="settingsForm.invalid"
+              >
+                Update Settings
+              </button>
             </fieldset>
+          </form>
 
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="email"
-                placeholder="Email"
-                formControlName="email" />
-            </fieldset>
+          <!-- Line break for logout button -->
+          <hr />
 
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="password"
-                placeholder="New Password"
-                formControlName="password" />
-            </fieldset>
-
-            <button class="btn btn-lg btn-primary pull-xs-right"
-              type="submit">
-              Update Settings
-            </button>
-
-          </fieldset>
-        </form>
-
-        <!-- Line break for logout button -->
-        <hr />
-
-        <button class="btn btn-outline-danger"
-          (click)="logout()">
+        <button class="btn btn-outline-danger mb-2" (click)="logout()">
           Or click here to logout.
         </button>
-
+        </form>
       </div>
     </div>
   </div>

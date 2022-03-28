@@ -1,58 +1,52 @@
-<div class="profile-page">
-
-  <div class="user-info">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="profile.image" class="user-img" />
-          <h4>{{ profile.username }}</h4>
-          <p>{{ profile.bio }}</p>
-          <app-follow-button
-          [hidden]="isUser"
-          [profile]="profile"
-          (onToggle)="onToggleFollowing($any($event))">
-        </app-follow-button>
-           <a [routerLink]="['/settings']"
-              [hidden]="!isUser"
-              class="btn btn-sm btn-outline-secondary action-btn">
-              <i class="ion-gear-a"></i> Edit Profile Settings
-            </a>
-        </div>
-
+<div class="profile-page container-fluid pe-0 ps-0">
+  <div class="user-info row pe-0 ps-0">
+    <div class=" ">
+      <div class="d-flex flex-column align-items-center">
+        <img [src]="profile.image" class="user-img m-2" />
+        <h4 class="profile-name">{{ profile.username }}</h4>
+        <p class="profile-bio">{{ profile.bio }}</p>
+      </div>
+      <app-follow-button [hidden]="CurrentUserName===profile.username " [profile]="profile"
+        (onToggle)="onToggleFollowing($any($event))">
+      </app-follow-button>
+      <div class="edit-btn container row mx-auto d-flex justify-content-end mb-2 pl-0 pr-0">
+        <a [routerLink]="['/settings']" [hidden]="CurrentUserName!==profile.username "
+          class="col-6 col-sm-6 col-md-4 col-lg-2 btn btn-sm btn-outline-secondary action-btn">
+          <i class="ion-gear-a"></i> Edit Profile Settings
+        </a>
       </div>
     </div>
   </div>
+
+
 
   <div class="container">
     <div class="row">
+      <div class="col-lg-12 col-md-9 col-sm-12 col-xs-12 mt-3">
+        <ul class="nav outline-active" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <span class="nav-link text-dark" [ngClass]="{'active': option==='mypost', '': option!=='mypost'}" role="tab"
+              data-toggle="pill" (click)="showMyPost()">My Post</span>
+          </li>
+          <li class="nav-item">
+            <span class="nav-link text-dark" [ngClass]="{'active': option==='favorite', '': option!=='favorite'}"
+              data-toggle="pill" role="tab" (click)="showFavourite()">Favorited Posts</span>
+          </li>
 
-      <div class="col-xs-12 col-md-10 offset-md-1">
-        <div class="articles-toggle">
-          <ul class="nav nav-pills outline-active">
-            <li class="nav-item">
-              <a class="nav-link"
-                 routerLinkActive="active"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLink]="['my-posts']">
-                 My Posts
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"
-                 routerLinkActive="active"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLink]="['favorites']">
-                 Favorited Posts
-              </a>
-            </li>
-          </ul>
+        </ul>
+        <hr class="mt-0" />
+      </div>
+      <div class="container">
+        <div class="row pl-0 pr-0 tablet">
+          <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 mt-3 mb-4">
+            <div class="tab-content ">
+              <app-feed [childOption]="option"  [username]="profile.username" [childCheckLogin]="checkLogin"></app-feed>
+              <!-- <app-my-article [childOption]="option" [childTag]="tag" [username]="profile.username"></app-my-article> -->
+            </div>
+          </div>
         </div>
 
-        <router-outlet></router-outlet>
       </div>
-
     </div>
   </div>
-
 </div>
