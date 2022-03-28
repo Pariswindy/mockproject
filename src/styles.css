@@ -1,0 +1,209 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@font-face {
+  font-family: myFont;
+  src: url(../src/assets/SteinfeldDEMO.ttf);
+}
+html body {
+  overflow-x: hidden;
+  height: 100vh;
+  position: relative;
+  max-width: 1920px;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+:root {
+  --text-color: white;
+  --text-color2: black;
+  --background-color: rgb(204, 137, 203);
+  --main-color: rgb(199, 255, 211);
+  --second-color: rgb(9, 206, 52);
+}
+@keyframes mymove {
+  0% {
+    background-color: rgb(199, 255, 211);
+  }
+  25% {
+    background-color: rgb(209, 243, 210);
+  }
+  50% {
+    background-color: rgb(210, 255, 223);
+  }
+  100% {
+    background-color: rgb(199, 255, 211);
+  }
+}
+.container-fluid {
+  min-height: 80vh;
+}
+.header {
+  height: 20vh;
+  animation: mymove 2s infinite;
+  text-align: center;
+  caret-color: transparent;
+  width: 100vw;
+}
+.header-brand {
+  font-size: 3em;
+  font-weight: 600;
+  font-family: myFont;
+}
+.nav {
+  margin: 0 auto;
+ 
+}
+.nav-brand {
+  color: rgb(131, 208, 148) !important;
+  font-size: 2em;
+  text-decoration: none;
+  font-weight: bold;
+  caret-color: transparent;
+}
+.nav-brand:hover {
+  color: rgb(180, 225, 190);
+  cursor: pointer;
+}
+.nav-right__list {
+  list-style-type: none;
+}
+ul li a {
+  text-decoration: none;
+  color: var(--text-color2);
+}
+ul li a:hover {
+  cursor: pointer;
+  color: var(--second-color);
+  transform: scale(1.1);
+  animation: mymove 1s;
+  border-radius: 10px;
+}
+ul li:hover {
+  cursor: pointer;
+  color: var(--second-color);
+  transform: scale(1.1);
+  animation: mymove 1s;
+  border-radius: 10px;
+}
+footer {
+  color: var(--main-color);
+  animation: mymove 2s infinite;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 2rem;
+  color: var(--text-color2);
+}
+.socials {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0;
+}
+
+.socials li {
+  margin: 0 10px;
+}
+
+.socials a {
+  text-decoration: none;
+  color: var(--text-color2);
+  padding: 4px;
+}
+
+.socials a i {
+  font-size: 1.2rem;
+  width: 20px;
+  transition: color 0.4s ease;
+  text-decoration: none;
+}
+
+.socials a:hover i {
+  color: rgb(189, 189, 189);
+  transform: scale(1.5);
+  text-decoration: none;
+}
+.btn-success {
+  background-color: rgb(130, 228, 182) !important;
+  border: none;
+}
+.btn-success:hover {
+  background-color: rgb(186, 252, 186) !important;
+  color: var(--text-color2) !important;
+}
+.disabled {
+  background-color: #ccc !important;
+}
+span a:hover {
+  color: grey !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+img {
+  border: 3px solid rgb(186, 252, 186);
+  width: 30px;
+  border-radius: 50%;
+  height: 30px;
+}
+li {
+  display: flex;
+  align-items: center;
+}
+.hide {
+  display: none;
+}
+.myToggle {
+  display: none !important;
+}
+
+@media screen and (max-width: 1068px) {
+  .nav {
+    justify-content: center;
+  }
+  .nav-right {
+    display: none !important;
+  }
+  .myToggle {
+    display: flex !important;
+  }
+  .animate__animated {
+    animation-fill-mode: none !important;
+  }
+  .animate__backInLeft {
+    -webkit-animation-name: none !important;
+    animation-name: none !important;
+  }
+  .w-sm-75 {
+    width: 75% !important;
+  }
+  .nav-brand {
+    font-size: 1.6em;
+  }
+  h2,
+  .header-brand {
+    font-size: 1.5em;
+  }
+  .nav {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .w-xs-100 {
+    width: 100% !important;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

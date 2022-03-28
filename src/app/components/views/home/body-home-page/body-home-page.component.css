@@ -1,0 +1,32 @@
+li > .active{
+    border-bottom: 3px solid #5cb85c;
+    color: #5cb85c !important;
+}
+
+.tags{
+    padding: 5px 10px;
+    background-color: lightgrey;
+    border-radius: 4px;
+}
+
+.option{
+    color: black;
+}
+
+.tag-item{
+    color: white !important;
+    background-color: gray !important;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    white-space: nowrap;
+    border-radius: 25px;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+@media (max-width: 576px) {
+   .tags{
+       margin-top:30px;
+   }
+ }

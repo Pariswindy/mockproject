@@ -1,0 +1,155 @@
+<div class="container-fluid" *ngIf="ArticleDetail">
+  <div class="brand row">
+    <div class="brand-header col-10 col-lg-10 col-sm-12 d-flex flex-column">
+      <div class="brand-title col-6">
+        <h2>{{ ArticleDetail?.title }}</h2>
+      </div>
+      <div class="brand-detail d-flex flex-row col-6">
+        <div class="d-flex flex-row">
+          <img src="{{ ArticleDetail?.author?.image }}" alt="#" style="height: 50px; width: 50px"/>
+          <div class="brand-detail-name d-flex flex-column">
+            <h5>{{ ArticleDetail?.author?.username }}</h5>
+            <p>{{ ArticleDetail?.createdAt | date: "MMMM d, y" }}</p>
+          </div>
+        </div>
+        <div class="d-flex flex-row" *ngIf="CurrentUserName!==ArticleDetail?.author?.username">
+          <div class="brand-follow" *ngIf="!ArticleDetail?.author?.following">
+            <button type="button" (click)="follow(ArticleDetail.author.username)">
+              Follow
+            </button>
+          </div>
+          <div class="brand-follow" *ngIf="ArticleDetail?.author?.following" >
+            <button type="button" (click)="unfollow(ArticleDetail.author.username)">
+              unFollow
+            </button>
+          </div>
+          <div class="brand-favorite" *ngIf="isfavour">
+            <button type="button" (click)="unfavourite()">
+              unFavourite({{ this.numberfavour }})
+            </button>
+          </div>
+          <div class="brand-favorite" *ngIf="!isfavour">
+            <button type="button" (click)="favourite()">
+              Favourite({{ this.numberfavour}})
+            </button>
+          </div>
+        </div>
+
+        <div class="d-flex flex-row" *ngIf="CurrentUserName===ArticleDetail?.author?.username">
+          <div class="brand-edit" *ngIf="CurrentUserName===ArticleDetail?.author?.username" [routerLink]="['../../edit', ArticleDetail.slug]">
+            <button type="button" >
+              Edit Article
+            </button>
+          </div>
+          <div class="brand-delete">
+            <button type="button" (click)="deleteArticle(ArticleDetail.slug)">
+              Delete Article
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <div *ngIf="!isLogin">
+        <span routerLink="/login">Sign in</span>  or <span routerLink="/sign-up">sign up</span>  to add comments on this article.
+      </div>
+  </div>
+
+  <div>
+    <div class="detail-body row">
+      <div class="d-flex flex-column col-xs-12">
+        <div class="detail-body-content">
+          <p class="detail-body-text">{{ ArticleDetail?.body }}</p>
+        </div>
+        <ul class="tag-list">
+          <li class="tag-default tag-pill tag-outline" *ngFor="let tag of ArticleDetail?.tagList">
+            {{ tag }}
+          </li>
+        </ul>
+      </div>
+      <hr />
+      <div class="">
+        <div class="brand-detail d-flex flex-row col-12 align-content-center justify-content-center">
+          <div class="d-flex flex-row">
+            <img src={{ArticleDetail?.author?.image}} alt="#" style="height: 50px; width: 50px" />
+            <div class="brand-detail-name d-flex flex-column">
+              <h5>{{ ArticleDetail?.author?.username }}</h5>
+              <p>{{ ArticleDetail?.createdAt | date: "MMMM d, y" }}</p>
+            </div>
+          </div>
+          <div class="brand-follow" *ngIf="!isfollow && CurrentUserName!==ArticleDetail?.author?.username">
+            <button type="button" (click)="follow(ArticleDetail.author.username)">
+              Follow
+            </button>
+          </div>
+          <div class="brand-follow" *ngIf="isfollow && CurrentUserName!==ArticleDetail?.author?.username">
+            <button type="button" (click)="unfollow(ArticleDetail.author.username)">
+              unFollow
+            </button>
+          </div>
+          <div class="brand-favorite" *ngIf="isfavour && CurrentUserName!==ArticleDetail?.author?.username">
+            <button type="button" (click)="unfavourite()">
+              unFavourite({{ this.numberfavour }})
+            </button>
+          </div>
+          <div class="brand-favorite" *ngIf="!isfavour && CurrentUserName!==ArticleDetail?.author?.username">
+            <button type="button" (click)="favourite()">
+              Favourite({{ this.numberfavour}})
+            </button>
+          </div>
+          <div class="brand-edit" *ngIf="CurrentUserName===ArticleDetail?.author?.username" [routerLink]="['../../edit', ArticleDetail.slug]">
+            <button type="button" >
+              Edit Article
+            </button>
+          </div>
+          <div class="brand-delete" *ngIf="CurrentUserName===ArticleDetail?.author?.username">
+            <button type="button" (click)="deleteArticle(ArticleDetail.slug)">
+              Delete Article
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="col-8 mx-auto d-flex align-items-center justify-content-center">
+        <div class="comment-card mt-3 p-3 col-10">
+          <div class="w-100 border-lightdary">
+            <textarea placeholder="Describe yourself here..." class="w-100 h-100 pl-2 py-3 mb-0"
+              [(ngModel)]="newComment">
+            </textarea>
+          </div>
+          <div class="w-100 bg-lightdary mt-0 p-3 px-4 d-flex flex-row-reverse">
+            <div>
+              <button class="btn btn-success p-2" (click)="sendPost(ArticleDetail.slug, newComment)"
+                [disabled]="newComment === ''">
+                Post Comment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="col-8 mx-auto d-flex flex-column align-items-center justify-content-center">
+        <div class="comment-list mt-3 p-3 col-10" *ngFor="let comment of ListComment; let i = index">
+          <div class="comment-body">
+            {{ comment?.body }}
+          </div>
+          <div>
+            <div class="d-flex flex-row">
+              <div>
+                <img src="{{ comment?.author?.image }}" style="height: 18px; width: 18px" />
+              </div>
+              <p>{{ comment?.author?.username }}</p>
+              <p>{{ comment?.updatedAt | date: "MMMM d, y" }}</p>
+            </div>
+            <div *ngIf="CurrentUserName===comment.author.username">
+              <button type="button" (click)="deleteComment(ArticleDetail.slug, comment.id, i)">
+                delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

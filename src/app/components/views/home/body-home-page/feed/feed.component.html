@@ -1,0 +1,33 @@
+<h4 *ngIf="waitingMes">{{ waitingMes }}....</h4>
+<div class="content-item" *ngFor="let item of listArticles">
+  <div class="">
+    <div class="">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex justify-content-between">
+            <h4 class="username">
+              <a>
+                <img [src]="item.author.image" style="border-radius: 50%;">
+              </a>
+              <b>{{ item.author.username }}</b>
+            </h4>
+            <div><app-favorite (isFavorite)="onFavorite($event, item)"  [childItem]="item"></app-favorite></div>
+          </div>
+          <p class="card-text text-muted">
+            {{ item.createdAt | date: "longDate" }}
+          </p>
+          <h3 class="card-text">
+            <b>{{ item.title }}</b>
+          </h3>
+          <p class="card-text">{{ item.description }}</p>
+          <div class="d-sm-flex justify-content-between">
+            <div>read more...</div>
+            <div class="">
+              <a class="tag" *ngFor="let tag of item.tagList">{{ tag }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

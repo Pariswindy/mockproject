@@ -1,0 +1,52 @@
+<div *ngIf="article && creatArticleform">
+  <h1 class="header-form">New Article</h1>
+  <form [formGroup]="creatArticleform"  class="d-flex flex-column justify-content-center align-items-center">
+    <div class="form-group col-6 col-lg-6 col-sm-12">
+      <label></label>
+      <input type="text" placeholder="Article  Title" class="form-control mb-3" formControlName="title" />
+      <div class="alert alert-danger "
+        *ngIf="creatArticleform.get('title')?.touched && creatArticleform.get('title')?.invalid">
+        <small *ngIf="creatArticleform.get('title')?.errors?.['required']"> Title is required</small>
+        <small *ngIf="creatArticleform.get('title')?.errors?.['tittledulicate']"> TitLe already exist</small>
+      </div>
+    </div>
+    <div class="form-group col-6 col-lg-6 col-sm-12">
+      <input type="text" class="form-control  mb-3 " placeholder="What's this article about?"
+        formControlName="description" />
+      <div class="alert alert-danger"
+        *ngIf="creatArticleform.get('description')?.touched && creatArticleform.get('description')?.invalid">
+        <small *ngIf="creatArticleform.get('description')?.errors?.['required']"> description is required</small>
+      </div>
+    </div>
+
+    <div class="form-group col-6 col-lg-6 col-sm-12">
+      <textarea class="form-control mb-3 " rows="3" placeholder="Write your article (in markdown)"
+        formControlName="body"></textarea>
+      <div class="alert alert-danger"
+        *ngIf="creatArticleform.get('body')?.touched && creatArticleform.get('body')?.invalid">
+        <small *ngIf="creatArticleform.get('body')?.errors?.['required']"> Body is required</small>
+      </div>
+    </div>
+    <div class="form-group col-6 col-lg-6 col-sm-12">
+      <input class="form-control" type="text" placeholder="Enter tags" [formControl]="tagField"
+        (keyup.space)="addTag()"/>
+
+      <div class="tag-list">
+        <span *ngFor="let tag of article?.tagList, let i =index" class="tag-default tag-pill">
+          <i class="ion-close-round" (click)="removeTag(tag)"></i>
+          {{ tag }}
+        </span>
+      </div>
+    </div>
+    <div class="form-group d-flex flex-row">
+      <button type="button" (click)="creatArticle(
+        creatArticleform.value.title,
+        creatArticleform.value.description,
+        creatArticleform.value.body,
+        article.tagList)" class="btn btn-success" [disabled]="!creatArticleform.valid"
+        [class.disabled]="!creatArticleform.valid">
+        Publich Article
+      </button>
+    </div>
+  </form>
+</div>

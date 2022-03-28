@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row justify-content-center p-4 mx-auto w-50 w-sm-75 w-xs-100">
+    <div class="col-md-10">
+      <form [formGroup]="signupForm" class="animate__animated animate__backInRight" (ngSubmit)="submitForm()">
+
+        <div class=" form-hearder text-center w-100 my-4">
+          <h2>Sign Up</h2>
+          <span>
+            <a class="text-success" routerLink="../login">Have an account?</a>
+          </span>
+        </div>
+
+        <div class="form-group mt-4">
+          <input name="username" class="form-control p-2" formControlName="username" placeholder="Enter username"
+            type="text" name="username" />
+          <div class="text-danger" *ngIf="get('username').touched && get('username').invalid">
+            <small *ngIf="get('username').errors?.['required']">
+              Username is required
+            </small>
+            <small *ngIf="get('username').errors?.['minlength']">The username is at least 6 characters
+            </small>
+            <!-- <small >
+              <p> {{signUpError}}</p>
+            </small> -->
+
+          </div>
+        </div>
+
+        <div class="form-group mt-4">
+          <input name="email" class="form-control p-2" formControlName="email" placeholder="Enter email" />
+          <div class="text-danger" *ngIf="get('email').touched && get('email').invalid">
+            <small *ngIf="get('email').errors?.['required']">
+              Email is required
+            </small>
+            <small *ngIf="get('username').errors?.['username']">The email is invalid</small>
+          </div>
+        </div>
+
+        <div class="form-group my-4">
+          <input type="password" name="password" class="form-control p-2" formControlName="password"
+            placeholder="Enter Password" />
+          <div class="text-danger" *ngIf="get('password').touched && get('password').invalid">
+            <small *ngIf="get('password').errors?.['required']">
+              Password is required</small>
+            <small *ngIf="get('password').errors?.['minlength']">The minimum length for password is 8</small>
+          </div>
+        </div>
+        <div class="row flex-wrap">
+          <small class="text-danger col-md-10" *ngIf="usernameError">
+            {{ usernameError }}
+          </small>
+          <small class="text-danger col-md-10" *ngIf="emailError.length > 0">
+            {{ emailError }}
+          </small>
+        </div>
+        <div class="form-group p-2 text-center">
+          <button type="submit" class="btn btn-success py-2 px-3" [disabled]="!signupForm.valid"
+            [class.disabled]="!signupForm.valid">
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
