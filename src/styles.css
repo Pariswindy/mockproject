@@ -261,7 +261,11 @@ h1.header-form {
 /* User Info */
 .user-info {
   border: 1px solid #ccc;
-  background-color: #ccc;
+  background-image: url('./assets/anhnen.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 20px 0px;
 }
 .user-img {
   width: 150px;
@@ -269,9 +273,11 @@ h1.header-form {
 }
 .profile-name {
   font-size: 1.6em !important;
+  color: white;
 }
 .profile-bio {
   font-size: 1.5em !important;
+  color: white;
 }
 .edit {
   text-align: center;
@@ -295,7 +301,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-pagination-control {
+.pagination-control {
 }
 .paging {
 }
