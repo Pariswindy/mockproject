@@ -6,44 +6,52 @@
       </div>
       <div class="brand-detail d-flex flex-column col-xl-12 col-lg-12 col-sm-12 col-12">
         <div class="d-flex flex-row">
-          <img src="{{ ArticleDetail?.author?.image }}" alt="#" style="height: 50px; width: 50px"/>
+          <img src="{{ ArticleDetail?.author?.image }}" alt="#" style="height: 50px; width: 50px" />
           <div class=" d-flex flex-column">
-            <h5 (click)="goToProfile(ArticleDetail.author.username)" class="brand-detail-name"> {{ ArticleDetail?.author?.username }}</h5>
+            <h5 (click)="goToProfile(ArticleDetail.author.username)" class="brand-detail-name"> {{
+              ArticleDetail?.author?.username }}</h5>
             <p>{{ ArticleDetail?.createdAt | date: "MMMM d, y" }}</p>
           </div>
         </div>
-        <div class="d-flex flex-column flex-sm-column flex-lg-row flex-xl-row " *ngIf="CurrentUserName!==ArticleDetail?.author?.username">
+        <div class="d-flex flex-column flex-sm-column flex-lg-row flex-xl-row "
+          *ngIf="CurrentUserName!==ArticleDetail?.author?.username">
           <div class="mr-3" *ngIf="!ArticleDetail?.author?.following">
-            <button type="button" (click)="follow(ArticleDetail.author.username)" class="brand-follow col-12 col-sm-10 col-md-6 col-lg-12 col-xl-12">
-             + follow {{ArticleDetail.author.username}}
+            <button type="button" (click)="follow(ArticleDetail.author.username)"
+              class="brand-follow col-12 col-sm-10 col-md-6 col-lg-12 col-xl-12">
+              + follow {{ArticleDetail.author.username}}
             </button>
           </div>
-          <div class="mr-3" *ngIf="ArticleDetail?.author?.following" >
-            <button type="button" (click)="unfollow(ArticleDetail.author.username)" class="brand-unfollow col-12 col-sm-10 col-md-6 col-lg-12 col-xl-12">
-             + Unfollow {{ArticleDetail.author.username}}
+          <div class="mr-3" *ngIf="ArticleDetail?.author?.following">
+            <button type="button" (click)="unfollow(ArticleDetail.author.username)"
+              class="brand-unfollow col-12 col-sm-10 col-md-6 col-lg-12 col-xl-12">
+              + Unfollow {{ArticleDetail.author.username}}
             </button>
           </div>
           <div class="mr-3" *ngIf="isfavour">
-            <button type="button" (click)="unfavourite()" class="brand-favorite col-12 col-sm-10 col-md-6 col-lg-10 col-xl- " > <i class="fas fa-heart"></i>&nbsp;
+            <button type="button" (click)="unfavourite()"
+              class="brand-favorite col-12 col-sm-10 col-md-6 col-lg-10 col-xl-12 "> <i class="fas fa-heart"></i>&nbsp;
               unfavourite Article ({{ numberfavour }})
             </button>
           </div>
           <div class="mr-3" *ngIf="!isfavour">
-            <button type="button" (click)="favourite()" class="brand-favorite col-12 col-sm-10 col-md-6 col-lg-10 col-xl-12 "> <i class="fas fa-heart"></i>&nbsp;
+            <button type="button" (click)="favourite()"
+              class="brand-favorite col-12 col-sm-10 col-md-6 col-lg-10 col-xl-12 "> <i class="fas fa-heart"></i>&nbsp;
               favourite Article ({{ numberfavour}})
             </button>
           </div>
         </div>
-        <div class="d-flex flex-column flex-sm-column flex-lg-row flex-xl-row" *ngIf="CurrentUserName===ArticleDetail?.author?.username">
-          <div  *ngIf="CurrentUserName===ArticleDetail?.author?.username" [routerLink]="['../../edit', ArticleDetail.slug]"
-          class=" ">
-            <button type="button" class="brand-edit col-12 col-sm-10 col-md-6 col-lg-10 col-xl-12" ><i class="fas fa-pencil  "></i>
+        <div class="d-flex flex-column flex-sm-column flex-lg-row flex-xl-row"
+          *ngIf="CurrentUserName===ArticleDetail?.author?.username">
+          <div *ngIf="CurrentUserName===ArticleDetail?.author?.username"
+            [routerLink]="['../../edit', ArticleDetail.slug]">
+            <button type="button" class="brand-edit col-12 col-sm-10 col-md-6 col-lg-10 col-xl-12"><i
+                class="fas fa-pencil  "></i>
               Edit Article
             </button>
           </div>
-          <div class=" ml-1 " >
-            <button type="button" (click)="deleteArticle(ArticleDetail.slug)" class="brand-delete  col-12 col-sm-10 col-md-6 col-lg-10 col-xl-12"
-            >
+          <div class=" ml-1 ">
+            <button type="button" (click)="deleteArticle(ArticleDetail.slug)"
+              class="brand-delete  col-12 col-sm-10 col-md-6 col-lg-10 col-xl-12">
               Delete Article
             </button>
           </div>
@@ -59,71 +67,80 @@
           <p class="detail-body-text">{{ ArticleDetail?.body }}</p>
         </div>
         <ul class="tag-list d-flex justify-content-center ">
-          <li class="tag-default tag-pill tag-outline tag col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1 " *ngFor="let tag of ArticleDetail?.tagList">
+          <li class="tag-default tag-pill tag-outline tag col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1 "
+            *ngFor="let tag of ArticleDetail?.tagList">
             <p>{{ tag }}</p>
           </li>
         </ul>
       </div>
       <hr />
 
-        <div class="brand-detail d-flex flex-row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 align-content-center justify-content-center align-items-center">
-          <div class="d-flex flex-row">
-            <img src={{ArticleDetail?.author?.image}} alt="#" style="height: 70px; width: 70px" />
-            <div class=" d-flex flex-column">
-              <h5 class="brand-detail-name">{{ ArticleDetail?.author?.username }}</h5>
-              <p>{{ ArticleDetail?.createdAt | date: "MMMM d, y" }}</p>
-            </div>
+      <div
+        class="brand-detail d-flex flex-row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 align-content-center justify-content-center align-items-center">
+        <div class="d-flex flex-row">
+          <img src={{ArticleDetail?.author?.image}} alt="#" style="height: 70px; width: 70px" />
+          <div class=" d-flex flex-column">
+            <h5 class="brand-detail-name">{{ ArticleDetail?.author?.username }}</h5>
+            <p>{{ ArticleDetail?.createdAt | date: "MMMM d, y" }}</p>
           </div>
-          <div class=" ml-2 d-flex flex-column flex-sm-column flex-lg-row flex-xl-row " *ngIf="CurrentUserName!==ArticleDetail?.author?.username">
-            <div class="mr-3" *ngIf="!ArticleDetail?.author?.following">
-              <button type="button" (click)="follow(ArticleDetail.author.username)" class="brand-follow col-12">
-               + follow {{ArticleDetail.author.username}}
-              </button>
-            </div>
-            <div class="mr-3" *ngIf="ArticleDetail?.author?.following" >
-              <button type="button" (click)="unfollow(ArticleDetail.author.username)" class="brand-unfollow col-12">
-               + Unfollow {{ArticleDetail.author.username}}
-              </button>
-            </div>
-            <div class="mr-3" *ngIf="isfavour">
-              <button type="button" (click)="unfavourite()" class="brand-favorite col-12" > <i class="fas fa-heart"></i>&nbsp;
-                unfavourite Article ({{ numberfavour }})
-              </button>
-            </div>
-            <div class="mr-3" *ngIf="!isfavour">
-              <button type="button" (click)="favourite()" class="brand-favorite col-12"> <i class="fas fa-heart"></i>&nbsp;
-                favourite Article ({{ numberfavour}})
-              </button>
-            </div>
+        </div>
+        <div class=" ml-2 d-flex flex-column flex-sm-column flex-lg-row flex-xl-row "
+          *ngIf="CurrentUserName!==ArticleDetail?.author?.username">
+          <div class="mr-3" *ngIf="!ArticleDetail?.author?.following">
+            <button type="button" (click)="follow(ArticleDetail.author.username)" class="brand-follow col-12">
+              + follow {{ArticleDetail.author.username}}
+            </button>
           </div>
-          <div class="ml-2 d-flex flex-column flex-sm-column flex-lg-row flex-xl-row" *ngIf="CurrentUserName===ArticleDetail?.author?.username">
-            <div  *ngIf="CurrentUserName===ArticleDetail?.author?.username" [routerLink]="['../../edit', ArticleDetail.slug]"
-            class=" ">
-              <button type="button" class="brand-edit col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" ><i class="fas fa-pencil "></i>
-                Edit Article
-              </button>
-            </div>
-            <div class="ml-1" >
-              <button type="button" (click)="deleteArticle(ArticleDetail.slug)" class="brand-delete col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-              >
-                Delete Article
-              </button>
-            </div>
+          <div class="mr-3" *ngIf="ArticleDetail?.author?.following">
+            <button type="button" (click)="unfollow(ArticleDetail.author.username)" class="brand-unfollow col-12">
+              + Unfollow {{ArticleDetail.author.username}}
+            </button>
           </div>
+          <div class="mr-3" *ngIf="isfavour">
+            <button type="button" (click)="unfavourite()" class="brand-favorite col-12"> <i
+                class="fas fa-heart"></i>&nbsp;
+              unfavourite Article ({{ numberfavour }})
+            </button>
           </div>
+          <div class="mr-3" *ngIf="!isfavour">
+            <button type="button" (click)="favourite()" class="brand-favorite col-12"> <i
+                class="fas fa-heart"></i>&nbsp;
+              favourite Article ({{ numberfavour}})
+            </button>
+          </div>
+        </div>
+        <div class="ml-2 d-flex flex-column flex-sm-column flex-lg-row flex-xl-row"
+          *ngIf="CurrentUserName===ArticleDetail?.author?.username">
+          <div *ngIf="CurrentUserName===ArticleDetail?.author?.username"
+            [routerLink]="['../../edit', ArticleDetail.slug]" class=" ">
+            <button type="button" class="brand-edit col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"><i
+                class="fas fa-pencil "></i>
+              Edit Article
+            </button>
+          </div>
+          <div class="ml-1">
+            <button type="button" (click)="deleteArticle(ArticleDetail.slug)"
+              class="brand-delete col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              Delete Article
+            </button>
+          </div>
+        </div>
+      </div>
 
-        <div class="row d-flex  justify-content-center align-items-center sigin">
-          <div *ngIf="!isLogin" class="col-4 mt-4">
-            <span routerLink="/login" class="login">Sign in</span>  or <span routerLink="/sign-up" class="login">sign up</span>  to add comments on this article.
-          </div>
+      <div class="row d-flex  justify-content-center align-items-center sigin">
+        <div *ngIf="!isLogin" class="col-4 mt-4">
+          <span routerLink="/login" class="login">Sign in</span> or <span routerLink="/sign-up" class="login">sign
+            up</span> to add comments on this article.
+        </div>
       </div>
 
       <!--  -->
-      <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6  mx-auto d-flex align-items-center justify-content-center">
+      <div
+        class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6  mx-auto d-flex align-items-center justify-content-center">
         <div class="comment-card mt-3 p-3 col-10 col-sm-12 col-md-12 col-lg-12 col-xl-10">
           <div class=" border-lightdary">
-            <input placeholder="Describe yourself here..." class=" pl-2 py-3 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 "
-              [(ngModel)]="newComment">
+            <input placeholder="Describe yourself here..."
+              class=" pl-2 py-3 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " [(ngModel)]="newComment">
           </div>
           <div class="w-100 bg-lightdary mt-0 p-3 px-4 d-flex flex-row-reverse">
             <div>
@@ -136,10 +153,12 @@
         </div>
       </div>
       <!--  -->
-      <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8  mx-auto d-flex flex-column align-items-center justify-content-center">
-        <div class="comment-list mt-1 p-3 col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 " *ngFor="let i = index,let comment of (ListComment | paginate: { itemsPerPage: 5, currentPage: p })">
-          <div class="comment-body col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" >
-           <p>{{ comment?.body }}</p>
+      <div
+        class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8  mx-auto d-flex flex-column align-items-center justify-content-center">
+        <div class="comment-list mt-1 p-3 col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 "
+          *ngFor="let i = index,let comment of (ListComment | paginate: { itemsPerPage: 5, currentPage: p })">
+          <div class="comment-body col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <p>{{ comment?.body }}</p>
           </div>
           <div class="comment-under d-flex flex-row justify-content-between align-items-center  align-content-center">
             <div class="d-flex flex-row align-content-center ">
@@ -149,8 +168,9 @@
               <p class="mr-2">{{ comment?.author?.username }}</p>
               <p>{{ comment?.updatedAt | date: "MMMM d, y" }}</p>
             </div>
-            <div >
-              <i class="fas fa-trash  mr-2"button (click)="deleteComment(ArticleDetail.slug, comment.id, i)" *ngIf="CurrentUserName===comment.author.username"> </i>
+            <div>
+              <i class="fas fa-trash  mr-2" button (click)="deleteComment(ArticleDetail.slug, comment.id, i)"
+                *ngIf="CurrentUserName===comment.author.username"> </i>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -39,9 +40,9 @@ export class NewArticleComponent implements OnInit, OnDestroy {
   ) {
         this.creatArticleform = this.fb.group(
           {
-            title: ['' ],
-            description: [''],
-            body: ['']
+            title: ['',Validators.required ],
+            description: ['',Validators.required],
+            body: ['',Validators.required]
 
       })
 
@@ -95,6 +96,9 @@ export class NewArticleComponent implements OnInit, OnDestroy {
     | boolean
     | UrlTree {
     return this.isEditing  || this.openDialog()
+  }
+  focusPass(){
+    this.error=""
   }
   ngOnDestroy() {
     this.subcription.unsubscribe();

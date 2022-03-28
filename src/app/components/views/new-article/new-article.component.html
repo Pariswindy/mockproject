@@ -1,10 +1,11 @@
 <app-header></app-header>
 <div class="col-lg-8 mx-auto new-article animate__animated animate__fadeInUpBig mt-5 mb-5" *ngIf="creatArticleform">
-  <h1 class="header-form">New Article</h1>
+  <div class="d-flex justify-content-center align-items-center"><h1 class="header-form">New Article</h1></div>
+
   <form [formGroup]="creatArticleform"  class="d-flex flex-column justify-content-center align-items-center">
     <div class="form-group col-12 col-lg-6 col-sm-12 col-md-9">
       <label></label>
-      <input type="text" placeholder="Article  Tittle" class="form-control mb-3" formControlName="title" />
+      <input type="text" (focus)="focusPass()" placeholder="Article  Tittle" class="form-control mb-3" formControlName="title" />
       <div class="alert alert-danger "
         *ngIf="creatArticleform.get('title')?.touched && creatArticleform.get('title')?.invalid">
         <small *ngIf="creatArticleform.get('title')?.errors?.['required']"> Title is required</small>
@@ -47,7 +48,7 @@
         creatArticleform.value.body,
         article.tagList)" class="btn btn-success" [disabled]="!creatArticleform.valid"
         >
-        Publich Article
+        Public Article
       </button>
     </div>
   </form>
