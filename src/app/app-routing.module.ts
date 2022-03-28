@@ -57,7 +57,6 @@ const routes: Routes = [
   {
     path: ':username',
     component: MyProfileComponent,
-
     resolve: {
       profile: MyProfileResolver
     },

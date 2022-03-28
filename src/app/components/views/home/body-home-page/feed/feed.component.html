@@ -33,16 +33,16 @@
               ></app-favorite>
             </div>
           </div>
-          <p class="card-text text-muted cursor" [routerLink]="item.slug">
+          <p class="card-text text-muted cursor" [routerLink]="['/home',item.slug]">
             {{ item.createdAt | date: "longDate" }}
           </p>
-          <h3 class="card-text cursor" [routerLink]="item.slug">
+          <h3 class="card-text cursor" [routerLink]="['/home',item.slug]">
             <b >{{ item.title }}</b>
           </h3>
-          <p class="card-text cursor" [routerLink]="item.slug">{{ item.description }}</p>
+          <p class="card-text cursor" [routerLink]="['/home',item.slug]">{{ item.description }}</p>
           <div class="d-sm-flex justify-content-between">
-            <div [routerLink]="item.slug" class="usernameitem">Read more...</div>
-            <div class=""[routerLink]="item.slug">
+            <div [routerLink]="['/home',item.slug]" class="usernameitem">Read more...</div>
+            <div class=""[routerLink]="['/home',item.slug]">
               <a class="tag " *ngFor="let tag of item.tagList">{{ tag }}</a>
             </div>
           </div>
