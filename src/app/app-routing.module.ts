@@ -7,9 +7,6 @@ import { EditComponent } from './components/views/new-article/edit/edit.componen
 import { NewArticleComponent } from './components/views/new-article/new-article.component';
 import { SignUpComponent } from './components/views/sign-up/sign-up.component';
 import { AuthService } from './services/Auth.service';
-
-import { FavoritedArticleComponent } from './components/views/my-profile/favorited-article/favorited-article.component';
-import { MyArticleComponent } from './components/views/my-profile/my-article/my-article.component';
 import { MyProfileResolver } from './components/views/my-profile/my-profile-resolver.service';
 import { MyProfileComponent } from './components/views/my-profile/my-profile.component';
 import { SettingComponent } from './components/views/setting/setting.component';
@@ -24,7 +21,8 @@ const routes: Routes = [
   {
     path: 'new-article',
     component: NewArticleComponent,
-    canDeactivate: [AuthService]
+    canDeactivate: [AuthService],
+    canActivate:[AuthGuard]
   },
 
   {
