@@ -71,6 +71,7 @@ export class EditComponent implements OnInit {
     body: string,
     tagList: string[]
   ) {
+    this.isEditing=true
     this.updateArticle(this.creatArticleform.value);
     if (this.article.slug) {
       this.articleService

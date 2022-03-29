@@ -72,6 +72,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
     body: string,
     tagList: string[]
   ) {
+    this.isEditing=true
   this.subcription.add(
     this.articleService.createArticle(title, description, body, tagList)
         .subscribe({next:((res) => {this.route.navigate(['home']);
